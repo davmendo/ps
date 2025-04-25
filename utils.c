@@ -1,8 +1,10 @@
 #include "push_swap.h"
 
-int list_length(t_node *stack)
+int	list_length(t_node *stack)
 {
-	int	len = 0;
+	int	len;
+
+	len = 0;
 	while (stack)
 	{
 		len++;
@@ -11,83 +13,76 @@ int list_length(t_node *stack)
 	return (len);
 }
 
-void free_stack(t_node *stack)
+void	free_stack(t_node *stack)
 {
-	t_node	*temp;
+	t_node	*tmp;
+
 	while (stack)
 	{
-		temp = stack;
-		stack = stack->next;
-		free(temp);
+		tmp = stack->next;
+		free(stack);
+		stack = tmp;
 	}
 }
 
-void free_split(char **split)
+void	free_split(char **split)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
+	if (!split)
+		return ;
 	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
+		free(split[i++]);
 	free(split);
 }
 
-int has_duplicates(t_node *stack)
+int	has_duplicates(t_node *stack)
 {
-	t_node	*a;
-	t_node	*b;
+	t_node	*current;
+	t_node	*check;
 
-	a = stack;
-	while (a)
+	current = stack;
+	while (current)
 	{
-		b = a->next;
-		while (b)
+		check = current->next;
+		while (check)
 		{
-			if (a->value == b->value)
+			if (current->value == check->value)
 				return (1);
-			b = b->next;
+			check = check->next;
 		}
-		a = a->next;
+		current = current->next;
 	}
 	return (0);
 }
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
-    int         i = 0;
-    long long   res = 0;
-    int         sign = 1;
+	int			i;
+	long long	num;
+	int			sign;
 
-    if (str[i] == '-' || str[i] == '+')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }
-    if (!str[i])
-        return (0);
-    while (str[i])
-    {
-        if (str[i] < '0' || str[i] > '9')
-            return (0);
-        res = res * 10 + (str[i] - '0');
-        if (sign == 1 && res > 2147483647)
-            return (0);
-        if (sign == -1 && res > 2147483648LL)
-            return (0);
-        i++;
-    }
-    return (1);
-}
-
-int is_sorted(t_node *stack)
-{
-	while (stack && stack->next)
+	i = 0;
+	num = 0;
+	sign = 1;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		if (stack->value > stack->next->value)
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
-		stack = stack->next;
+		num = num * 10 + (str[i] - '0');
+		if ((sign == 1 && num > INT_MAX) || 
+			(sign == -1 && num > (long long)INT_MAX + 1))
+			return (0);
+		i++;
 	}
 	return (1);
 }

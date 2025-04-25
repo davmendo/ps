@@ -1,7 +1,33 @@
 #include "push_swap.h"
 #include "print_ops.h"
 
-void sort_three(t_node **stack_a)
+static int	find_min_position(t_node *stack)
+{
+	int		min;
+	int		pos;
+	int		min_pos;
+	t_node	*current;
+
+	if (!stack)
+		return (-1);
+	current = stack;
+	min = current->value;
+	min_pos = 0;
+	pos = 0;
+	while (current)
+	{
+		if (current->value < min)
+		{
+			min = current->value;
+			min_pos = pos;
+		}
+		current = current->next;
+		pos++;
+	}
+	return (min_pos);
+}
+
+void	sort_three(t_node **stack_a)
 {
 	int	a;
 	int	b;
@@ -28,59 +54,52 @@ void sort_three(t_node **stack_a)
 		do_rra(stack_a);
 }
 
-static int get_min_index(t_node *stack)
+static void	push_min_to_b(t_node **a, t_node **b, int len)
 {
-	int	min;
 	int	pos;
 	int	i;
 
-	if (!stack)
-		return (-1);
-	min = stack->value;
-	pos = 0;
-	i = 0;
-	while (stack)
+	pos = find_min_position(*a);
+	if (pos <= len / 2)
 	{
-		if (stack->value < min)
+		i = 0;
+		while (i < pos)
 		{
-			min = stack->value;
-			pos = i;
+			do_ra(a);
+			i++;
 		}
-		stack = stack->next;
-		i++;
 	}
-	return (pos);
+	else
+	{
+		i = 0;
+		while (i < len - pos)
+		{
+			do_rra(a);
+			i++;
+		}
+	}
+	do_pb(a, b);
 }
 
-void improved_sort_five(t_node **stack_a, t_node **stack_b)
+void	sort_small(t_node **stack_a, t_node **stack_b)
 {
 	int	len;
-	int	pos;
-	int	i;
 
 	len = list_length(*stack_a);
+	if (len == 2)
+	{
+		if ((*stack_a)->value > (*stack_a)->next->value)
+			do_sa(stack_a);
+		return ;
+	}
+	if (len == 3)
+	{
+		sort_three(stack_a);
+		return ;
+	}
 	while (len > 3)
 	{
-		pos = get_min_index(*stack_a);
-		if (pos > len / 2)
-		{
-			i = 0;
-			while (i < len - pos)
-			{
-				do_rra(stack_a);
-				i++;
-			}
-		}
-		else
-		{
-			i = 0;
-			while (i < pos)
-			{
-				do_ra(stack_a);
-				i++;
-			}
-		}
-		do_pb(stack_a, stack_b);
+		push_min_to_b(stack_a, stack_b, len);
 		len--;
 	}
 	sort_three(stack_a);
