@@ -54,11 +54,13 @@ void	sort_three(t_node **stack_a)
 		do_rra(stack_a);
 }
 
-static void	push_min_to_b(t_node **a, t_node **b, int len)
+static void	push_min_to_b(t_node **a, t_node **b)
 {
 	int	pos;
 	int	i;
+	int	len;
 
+	len = list_length(*a);
 	pos = find_min_position(*a);
 	if (pos <= len / 2)
 	{
@@ -81,6 +83,21 @@ static void	push_min_to_b(t_node **a, t_node **b, int len)
 	do_pb(a, b);
 }
 
+void	sort_five(t_node **stack_a, t_node **stack_b)
+{
+	int	len;
+
+	len = list_length(*stack_a);
+	while (len > 3)
+	{
+		push_min_to_b(stack_a, stack_b);
+		len--;
+	}
+	sort_three(stack_a);
+	while (*stack_b)
+		do_pa(stack_a, stack_b);
+}
+
 void	sort_small(t_node **stack_a, t_node **stack_b)
 {
 	int	len;
@@ -97,12 +114,6 @@ void	sort_small(t_node **stack_a, t_node **stack_b)
 		sort_three(stack_a);
 		return ;
 	}
-	while (len > 3)
-	{
-		push_min_to_b(stack_a, stack_b, len);
-		len--;
-	}
-	sort_three(stack_a);
-	while (*stack_b)
-		do_pa(stack_a, stack_b);
+	if (len <= 5)
+		sort_five(stack_a, stack_b);
 }

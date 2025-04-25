@@ -30,6 +30,7 @@ void	assign_index(t_node *stack);
 /* Sorting Algorithms */
 void	sort_small(t_node **stack_a, t_node **stack_b);
 void	sort_three(t_node **stack_a);
+void	sort_five(t_node **stack_a, t_node **stack_b);
 void	sort_chunks(t_node **stack_a, t_node **stack_b);
 
 /* Operations */
