@@ -18,7 +18,7 @@ void	do_sb(t_node **b)
 	print_op("sb");
 }
 
-void    do_ss(t_node **a, t_node **b)
+void	do_ss(t_node **a, t_node **b)
 {
 	op_ss(a, b);
 	print_op("ss");

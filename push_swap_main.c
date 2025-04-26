@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include "print_ops.h"
 
 static void	process_split_numbers(char **nums, t_node **stack)
 {

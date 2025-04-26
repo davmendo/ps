@@ -33,7 +33,7 @@ void	sort_three(t_node **stack_a);
 void	sort_five(t_node **stack_a, t_node **stack_b);
 void	sort_chunks(t_node **stack_a, t_node **stack_b);
 
-/* Operations */
+/* Basic Operations */
 void	op_sa(t_node **stack_a);
 void	op_sb(t_node **stack_b);
 void	op_ss(t_node **stack_a, t_node **stack_b);
@@ -45,5 +45,18 @@ void	op_rr(t_node **stack_a, t_node **stack_b);
 void	op_rra(t_node **stack_a);
 void	op_rrb(t_node **stack_b);
 void	op_rrr(t_node **stack_a, t_node **stack_b);
+
+/* Operations with print */
+void	do_sa(t_node **a);
+void	do_sb(t_node **b);
+void	do_ss(t_node **a, t_node **b);
+void	do_pa(t_node **a, t_node **b);
+void	do_pb(t_node **a, t_node **b);
+void	do_ra(t_node **a);
+void	do_rb(t_node **b);
+void	do_rr(t_node **a, t_node **b);
+void	do_rra(t_node **a);
+void	do_rrb(t_node **b);
+void	do_rrr(t_node **a, t_node **b);
 
 #endif

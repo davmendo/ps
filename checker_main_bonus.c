@@ -1,6 +1,4 @@
-#include "push_swap.h"
 #include "checker_bonus.h"
-#include <stdlib.h>
 
 void execute_instruction(char *instr, t_node **stack_a, t_node **stack_b)
 {

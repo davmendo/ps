@@ -10,10 +10,10 @@ CFLAGS      := -Wall -Wextra -Werror
 # Fontes e objetos do push_swap
 SRCS_PUSH_SWAP := \
 	push_swap_main.c \
-	print_ops.c \
 	operations1.c \
 	operations2.c \
 	operations3.c \
+	operations_print.c \
 	sorting.c \
 	sorting_small.c \
 	chunk_sort.c \

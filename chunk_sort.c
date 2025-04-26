@@ -3,7 +3,6 @@
  */
 
 #include "push_swap.h"
-#include "print_ops.h"
 
 static int	get_chunk_count(int total)
 {

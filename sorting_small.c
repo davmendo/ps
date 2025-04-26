@@ -1,5 +1,4 @@
 #include "push_swap.h"
-#include "print_ops.h"
 
 static int	find_min_position(t_node *stack)
 {
